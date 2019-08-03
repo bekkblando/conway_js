@@ -61,7 +61,6 @@ table {
   
   .cellContainer{
     display: inline-flex;
-    background-color: grey;
     flex-wrap: wrap;
     overflow-wrap: normal;
     height: 100%;
@@ -74,11 +73,11 @@ table {
   html, body{
     text-align: center;
     margin: 0px auto;
+    background-color: grey;
     height: 100%;
   }
 
   .menu{
       width: 100%;
   }
-
   
