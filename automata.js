@@ -4,16 +4,76 @@ var executions = []
 var stepper = 1
 var window_width = window.innerWidth
 var window_height = window.innerHeight
+var playing = false
+var rewinding = false
+var intervalID
+var rewindID
+var speed = 500
+var container_history = []
+var hist_id = 0
+
+var save_dead_cells = () => {
+    container_history.push(Array.from(document.getElementsByClassName('dead')).map((element) => {
+        return element.id
+    }))
+}
+
+var load_state = (data) => {
+    Array.from(document.getElementsByClassName('cell')).map((cell) => {
+        live = !document.getElementById(cell.id).classList.contains('dead')
+        if(data.includes(cell.id) && live){
+            cell.classList.toggle('dead')
+        }else if((!data.includes(cell.id)) && !live){
+            cell.classList.toggle('dead')
+        }
+    })
+}
+
+var back = () => {
+    if(hist_id < 1){
+        window.clearInterval(rewindID)
+        hist_id = 0
+        return;
+    }
+    hist_id -= 1
+    load_state(container_history[hist_id])
+    container_history.length = hist_id
+}
+
+var rewind = () => {
+    speed = document.getElementById("speed").value
+    rewinding = rewinding ? false : true
+    console.log(hist_id)
+    if(rewinding && hist_id > 0) { 
+        rewindID = window.setInterval(back, speed) 
+    }else window.clearInterval(rewindID);
+}
+
+
+
+var random_state = () => {
+    stepper = 1
+    const percent = document.getElementById("percent").value
+    apply_random_state(percent)
+}
+
+var apply_random_state = (percent) => {
+    if(stepper <= total){
+        random_number = Math.ceil(Math.random() * 100)
+        if(random_number <= percent){
+            birth(stepper);
+        }
+        stepper++;
+        apply_random_state(percent);
+    }
+}
 
 
 var calculate_board = () => {
     window_width = window.innerWidth
     window_height = window.innerHeight
-    console.log(window_width, screen.width)
     width = parseInt((65 * window_width)/1440)
-    console.log(width)
     height = parseInt(window_height/20)
-    console.log("Height: ", height)
     total = (width * height)
     return width, height, total
 }
@@ -23,22 +83,22 @@ var calculate_board = () => {
 
 render = () => {
     counter = 1
-    width, height, total= calculate_board()
+    width, height, total = calculate_board()
 
     var createDiv = () => {
 
-    if(counter <= total){
-        var newDiv = document.createElement('div')
-        newDiv.classList.add('cell')
-        newDiv.classList.add('dead')
-        newDiv.setAttribute("id", counter)
-        newDiv.addEventListener('click', function (event) {
-            event.target.classList.toggle('dead')
-            });
-        document.getElementById("cellContainer").appendChild(newDiv)
-        counter++
-        createDiv()
-    }
+        if(counter <= total){
+            var newDiv = document.createElement('div')
+            newDiv.classList.add('cell')
+            newDiv.classList.add('dead')
+            newDiv.setAttribute("id", counter)
+            newDiv.addEventListener('click', function (event) {
+                event.target.classList.toggle('dead')
+                });
+            document.getElementById("cellContainer").appendChild(newDiv)
+            counter++
+            createDiv()
+        }
 
     }
 
@@ -120,7 +180,10 @@ var step = () => {
     stepper = 1
     executions = []
     applyRules()
+    save_dead_cells()
+    hist_id++;
     executions.map((func) => func())
+
 }
 
 var kill = (cell) => {
@@ -147,9 +210,7 @@ var liveOrDie = (liveCells, cell) => {
 
 }
 
-var playing = false;
-var intervalID;
-var speed = 500
+
 var togglePlay = () => {
     speed = document.getElementById("speed").value
     playing = playing ? false : true

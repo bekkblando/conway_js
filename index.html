@@ -9,9 +9,14 @@
 
 <body>
     <section class="menu">
+        <button class = "back" onClick="back()">Back</button>
         <button class = "step" onClick="step()">Step</button>
+        <button class = "rewind" onClick="rewind()">Toggle Rewind</button>
         <button class = "step" onClick="togglePlay()">Toggle Play</button>
         <input type = "number" id="speed"/>
+        <label for="percent">Percent Chance Cell Comes Alive in Random Gen</label>
+        <input name = "percent" type = "number" min = "0" max = "100" id = "percent" />
+        <button class = "percent" onClick = "random_state()">Randomly Generate</button>
     </section>
 
 
