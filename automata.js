@@ -38,6 +38,7 @@ var back = () => {
     hist_id -= 1
     load_state(container_history[hist_id])
     container_history.length = hist_id
+    return false;
 }
 
 var rewind = () => {
@@ -47,6 +48,7 @@ var rewind = () => {
     if(rewinding && hist_id > 0) { 
         rewindID = window.setInterval(back, speed) 
     }else window.clearInterval(rewindID);
+    return false;
 }
 
 
@@ -77,6 +79,8 @@ var calculate_board = () => {
     total = (width * height)
     return width, height, total
 }
+
+
 
 // Whatever the width is needs to be divisible by 21 and 
 
@@ -183,7 +187,7 @@ var step = () => {
     save_dead_cells()
     hist_id++;
     executions.map((func) => func())
-
+    return false;
 }
 
 var kill = (cell) => {
@@ -211,12 +215,15 @@ var liveOrDie = (liveCells, cell) => {
 }
 
 
+
+
 var togglePlay = () => {
     speed = document.getElementById("speed").value
     playing = playing ? false : true
     if(playing) { 
         intervalID = window.setInterval(step, speed) 
     }else window.clearInterval(intervalID);
+    return false;
 }
 
 var clearCells = () => {

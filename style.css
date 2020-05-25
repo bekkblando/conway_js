@@ -55,6 +55,13 @@ table {
     text-align: center;
   }
   
+  .label{
+    height: 20px;
+    margin: 1px;
+    flex: 0 0 20px;
+    text-align: center;
+  }
+  
   .dead{
     background-color: white;
   }
@@ -69,11 +76,12 @@ table {
     align-items: center;
     justify-content: center;
   }
+  
 
   html, body{
     text-align: center;
     margin: 0px auto;
-    background-color: grey;
+    background-color: #E3F2FD;
     height: 100%;
   }
 

@@ -4,28 +4,70 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
   <title>JS Automata</title>
+  <script src="https://kit.fontawesome.com/8be145f4b8.js"></script>
+  <link href="materialize.css"  rel="stylesheet">
   <link href="style.css"  rel="stylesheet">
 </head>
 
 <body>
+  <button name = "sound" id = "sound">Play Sound</button>
+  <iframe width="420" height="315"
+src="https://www.youtube.com/embed/3siHgkArebE">
+</iframe>
     <section class="menu">
-        <button class = "back" onClick="back()">Back</button>
-        <button class = "step" onClick="step()">Step</button>
-        <button class = "rewind" onClick="rewind()">Toggle Rewind</button>
-        <button class = "step" onClick="togglePlay()">Toggle Play</button>
-        <input type = "number" id="speed"/>
-        <label for="percent">Percent Chance Cell Comes Alive in Random Gen</label>
-        <input name = "percent" type = "number" min = "0" max = "100" id = "percent" />
-        <button class = "percent" onClick = "random_state()">Randomly Generate</button>
+      <div class="container">
+          <div class = "row">
+            <div class = "col s3">
+              <input type = "color" id = "live" onClick = "setLiveColor()" />
+              <input type = "color" id = "dead" onClick = "setColor('dead')" />
+              <input type = "color" id = "background" onClick = "setColor('background')" />
+            </div>
+            <div class = "col s3">
+              <button class = "back waves-effect waves-light btn pink" onClick="back()">Back</button>
+              <button class = "step waves-effect waves-light btn pink" onClick="step()">Step</button>
+            </div>
+          <div class="col s3">
+            <label for="speed">Speed in milliseconds of the playthrough and rewind</label>
+            <input type = "number" id="speed" name = "speed"/>
+            <button class = "rewind waves-effect waves-light btn pink" onClick="rewind()">Toggle Rewind</button>
+            <button class = "step waves-effect waves-light btn pink" onClick="togglePlay()">Toggle Play</button>
+          </div>
+          
+          <div class="col s3">
+              <label for="percent">Percent Chance Cell Comes Alive in Random Gen</label>
+            <input name = "percent" type = "number" min = "0" max = "100" id = "percent" />
+            <button class = "percent waves-effect waves-light btn pink" onClick = "random_state()">Randomly Generate</button>
+          </div>
+        </div>
+      </div>
     </section>
 
 
     <div class = "cellContainer" id = "cellContainer">
-    
+      <div class="fixed-action-btn">
+        <a class="btn-floating btn-large pink">
+            <i class="fas fa-pencil-alt"></i>
+        </a>
+        <ul>
+          <li><a class="btn-floating purple accent-1" onclick='return back()'><i class="fas fa-step-backward"></i></a></li>
+          <li><a class="btn-floating  blue accent-1" onclick='return step()'><i class="fas fa-step-forward"></i></a></li>
+          <li><a class="btn-floating green accent-1" onclick='return rewind()'><i class="fas fa-backward"></i></a></li>
+          <li><a class="btn-floating amber accent-1" onclick='return togglePlay()'><i class="fas fa-play"></i></a></li>
+        </ul>
+      </div>
     </div>
 </body>
 
 <footer>
+  <script src="materialize.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var elems = document.querySelectorAll('.fixed-action-btn');
+      var instances = M.FloatingActionButton.init(elems, {});
+    });
+  </script>
+  <script src="sound.js"></script>
+  <script src="color.js"></script>
   <script src="automata.js"></script>
 </footer>
 </html>
