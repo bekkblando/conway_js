@@ -75,8 +75,8 @@ var calculate_board = () => {
     dets = document.getElementById('cellContainer').getBoundingClientRect()
     window_width =  dets.width;
     window_height = dets.height;
-    width = parseInt((65 * window_width)/1440)
-    height = parseInt(window_height/20)
+    width = Math.floor(window_width/22)
+    height = Math.floor(window_height/22)
     total = (width * height)
     return width, height, total
 }
