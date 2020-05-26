@@ -10,17 +10,26 @@
 </head>
 
 <body>
-  <button name = "sound" id = "sound">Play Sound</button>
-  <iframe width="420" height="315"
+  <!-- <button name = "sound" id = "sound">Play Sound</button> -->
+  <!-- <iframe width="420" height="315"
 src="https://www.youtube.com/embed/3siHgkArebE">
-</iframe>
+</iframe> -->
     <section class="menu">
       <div class="container">
           <div class = "row">
             <div class = "col s3">
-              <input type = "color" id = "live" onClick = "setLiveColor()" />
-              <input type = "color" id = "dead" onClick = "setColor('dead')" />
-              <input type = "color" id = "background" onClick = "setColor('background')" />
+              <div>
+                Set the color for live cells
+                <input type = "color" id = "live" onChange = "setColor('--cell-bg-color', 'live')" />
+              </div>
+              <div>
+                Set the color for dead cells
+              <input type = "color" id = "dead" onChange = "setColor('--dead-bg-color', 'dead')" />
+            </div>
+            <div>
+              Set the background color
+              <input type = "color" id = "background" onChange = "setColor('--main-bg-color', 'background')" />
+            </div>
             </div>
             <div class = "col s3">
               <button class = "back waves-effect waves-light btn pink" onClick="back()">Back</button>
@@ -66,7 +75,7 @@ src="https://www.youtube.com/embed/3siHgkArebE">
       var instances = M.FloatingActionButton.init(elems, {});
     });
   </script>
-  <script src="sound.js"></script>
+  <!-- <script src="sound.js"></script> -->
   <script src="color.js"></script>
   <script src="automata.js"></script>
 </footer>

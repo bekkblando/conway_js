@@ -72,8 +72,9 @@ var apply_random_state = (percent) => {
 
 
 var calculate_board = () => {
-    window_width = window.innerWidth
-    window_height = window.innerHeight
+    dets = document.getElementById('cellContainer').getBoundingClientRect()
+    window_width =  dets.width;
+    window_height = dets.height;
     width = parseInt((65 * window_width)/1440)
     height = parseInt(window_height/20)
     total = (width * height)

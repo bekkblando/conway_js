@@ -2,6 +2,11 @@
    v2.0 | 20110126
    License: none (public domain)
 */
+:root {
+  --main-bg-color: #E3F2FD;
+  --dead-bg-color: white;
+  --cell-bg-color: black;
+}
 
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -48,7 +53,7 @@ table {
 }
 
 .cell{
-    background-color: black;
+    background-color: var(--cell-bg-color);
     height: 20px;
     margin: 1px;
     flex: 0 0 20px;
@@ -63,7 +68,7 @@ table {
   }
   
   .dead{
-    background-color: white;
+    background-color: var(--dead-bg-color);
   }
   
   .cellContainer{
@@ -75,13 +80,14 @@ table {
     margin: 0;
     align-items: center;
     justify-content: center;
+    width: 100%;
   }
   
 
   html, body{
     text-align: center;
     margin: 0px auto;
-    background-color: #E3F2FD;
+    background-color: var(--main-bg-color) ;
     height: 100%;
   }
 
