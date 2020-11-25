@@ -71,7 +71,7 @@ var apply_random_state = (percent) => {
 }
 
 
-var calculate_board = () => {
+ var calculate_board = () => {
     dets = document.getElementById('cellContainer').getBoundingClientRect()
     window_width =  dets.width;
     window_height = dets.height;
