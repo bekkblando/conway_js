@@ -88,19 +88,31 @@ var apply_random_state = (percent) => {
 
 render = () => {
     counter = 1
+
     width, height, total = calculate_board()
+    xCounter = -Math.floor(width/2)
+    yCounter = Math.floor(height/2) - 1
 
     var createDiv = () => {
 
         if(counter <= total){
+            if(!(counter%width)){
+                yCounter--;
+            }
+            xCounter++;
             var newDiv = document.createElement('div')
             newDiv.classList.add('cell')
             newDiv.classList.add('dead')
             newDiv.setAttribute("id", counter)
+            newDiv.setAttribute("x", xCounter)
+            newDiv.setAttribute("y", yCounter)
             newDiv.addEventListener('click', function (event) {
                 event.target.classList.toggle('dead')
                 });
             document.getElementById("cellContainer").appendChild(newDiv)
+            if(!(counter%width)){
+                xCounter = -Math.floor(width/2);
+            }
             counter++
             createDiv()
         }
